@@ -88,6 +88,8 @@ jucer_project_files("template/Source/dsp"
 jucer_project_files("template/Source/dsp/Bones"
 # Compile   Xcode     Binary    File
 #           Resource  Resource
+        x         .         .         "Source/dsp/Bones/GainBone.h"
+
 )
 
 jucer_project_files("template/Source/looknfeel"

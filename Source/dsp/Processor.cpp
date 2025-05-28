@@ -2,6 +2,7 @@
 
 #include "Processor.h"
 #include <filesystem>
+#include "Bones/GainBone.h"
 #include <iostream>
 
 
@@ -17,6 +18,7 @@ SkeletonAudioProcessor::SkeletonAudioProcessor(juce::AudioProcessorValueTreeStat
 
 {
     setRateAndBufferSizeDetails(mSampleRate, mBlockSize);
+    initialiseGraph();
 }
 SkeletonAudioProcessor::~SkeletonAudioProcessor()
 {
@@ -44,7 +46,9 @@ void SkeletonAudioProcessor::updateMeter(bool isOutput, AudioBuffer<float>& buff
     }
 }
 
-void SkeletonAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuffer&)
+void SkeletonAudioProcessor::processBlock(AudioBuffer<float>& inBuffer, MidiBuffer& inMidiBuffer)
 {
-
+    juce::ScopedNoDenormals noDenormals;
+    mProcessorGraph.processBlock(inBuffer, inMidiBuffer);
+    updateMeter(true, inBuffer, inBuffer.getNumSamples(), getTotalNumOutputChannels());
 }

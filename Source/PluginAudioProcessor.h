@@ -44,7 +44,10 @@ public:
     {
         std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
         params.push_back(std::make_unique<juce::AudioParameterFloat>("gain", "Gain", 0.0f, 1.0f, 0.5f));
-    
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain3", "Gain3", 0.0f, 1.0f, 0.5f));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain4", "Gain4", 0.0f, 1.0f, 0.5f));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain5", "Gain5", 0.0f, 1.0f, 0.5f));
+
         return { params.begin(), params.end() };
     }
 
@@ -54,8 +57,10 @@ public:
     void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override;
 
     AudioProcessorEditor* createEditor() override {
-        auto editor = new RootViewComponent(mSkeletonProcessor);
-        editor->updatePath();
+        //auto editor = new RootViewComponent(mSkeletonProcessor);
+
+        //editor->updatePath();
+        auto editor = new GenericAudioProcessorEditor(mSkeletonProcessor);
         return editor;
     }
     bool hasEditor() const override                        { return true;   }
