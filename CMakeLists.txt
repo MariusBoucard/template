@@ -300,3 +300,9 @@ jucer_export_target_configuration(
 )
 
 jucer_project_end()
+
+add_custom_command(TARGET template_VST3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:template_VST3>"
+        "D:\\vstcreation\\$<TARGET_FILE_NAME:template_VST3>"
+)

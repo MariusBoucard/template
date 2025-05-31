@@ -12,13 +12,14 @@ public:
     GainProcessor()
         : AudioProcessor (BusesProperties().withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
                                            .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
-          gainParameter (std::make_unique<juce::AudioParameterFloat> ("gain", "Gain", 0.0f, 1.0f, 0.5f))
+          gainParameter (new juce::AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f))
     {
-        addParameter (gainParameter.get());
+        addParameter (gainParameter);
     }
 
     ~GainProcessor() override
     {
+
     }
 
     //==============================================================================
@@ -108,7 +109,7 @@ public:
 
     //==============================================================================
     // Member variable to hold our gain parameter
-    std::unique_ptr<juce::AudioParameterFloat> gainParameter;
+    juce::AudioParameterFloat* gainParameter;
 
 private:
     //==============================================================================

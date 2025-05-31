@@ -9,8 +9,6 @@ RootViewComponent::RootViewComponent(juce::AudioProcessor& processor)
     : AudioProcessorEditor(processor)
     , mProcessor(processor)
 {
-    auto& gainProcessor = processor; 
-
     auto imageData = BinaryData::plate_png;
     auto imageDataSize = BinaryData::plate_pngSize;
 
@@ -21,7 +19,7 @@ RootViewComponent::RootViewComponent(juce::AudioProcessor& processor)
 
     setSize(mImage.getBounds().getWidth(), mImage.getBounds().getHeight());
     defineKnobLayout();
-    configureNodes(gainProcessor);
+    configureNodes(processor);
 }
 
 RootViewComponent::~RootViewComponent()
@@ -42,23 +40,23 @@ void RootViewComponent::updatePath()
 
 void RootViewComponent::paint(juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
-
-    if (!mImage.isNull())
-    {
-        auto bounds = getLocalBounds().toFloat();
-        auto imageBounds = mImage.getBounds().toFloat();
-        auto scale = juce::jmin(bounds.getWidth() / imageBounds.getWidth(),
-            bounds.getHeight() / imageBounds.getHeight());
-        auto scaledImageBounds = imageBounds.withSize(imageBounds.getWidth() * scale,
-            imageBounds.getHeight() * scale);
-        g.drawImage(mImage, scaledImageBounds);
-    }
-    else
-    {
-        g.setColour(juce::Colours::white);
-        g.drawText("Image not found", getLocalBounds(), juce::Justification::centred);
-    }
+    // g.fillAll(juce::Colours::black);
+    //
+    // if (!mImage.isNull())
+    // {
+    //     auto bounds = getLocalBounds().toFloat();
+    //     auto imageBounds = mImage.getBounds().toFloat();
+    //     auto scale = juce::jmin(bounds.getWidth() / imageBounds.getWidth(),
+    //         bounds.getHeight() / imageBounds.getHeight());
+    //     auto scaledImageBounds = imageBounds.withSize(imageBounds.getWidth() * scale,
+    //         imageBounds.getHeight() * scale);
+    //     g.drawImage(mImage, scaledImageBounds);
+    // }
+    // else
+    // {
+    //     g.setColour(juce::Colours::white);
+    //     g.drawText("Image not found", getLocalBounds(), juce::Justification::centred);
+    // }
 }
 
 void RootViewComponent::resized()

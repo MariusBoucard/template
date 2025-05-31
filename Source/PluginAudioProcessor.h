@@ -60,12 +60,12 @@ public:
         //auto editor = new RootViewComponent(mSkeletonProcessor);
 
         //editor->updatePath();
-        auto editor = new GenericAudioProcessorEditor(mSkeletonProcessor);
+        auto editor = new GenericAudioProcessorEditor(this);
         return editor;
     }
     bool hasEditor() const override                        { return true;   }
 
-    const String getName() const override                  { return "Radiator"; }
+    const String getName() const override                  { return "Template"; }
     bool acceptsMidi() const override                      { return false; }
     bool producesMidi() const override                     { return false; }
     double getTailLengthSeconds() const override           { return 0; }
@@ -86,25 +86,11 @@ public:
 
     void setStateInformation (const void* data, int sizeInBytes) override
     {
-        juce::MemoryInputStream stream(data, static_cast<size_t>(sizeInBytes), false);
-        auto newState = juce::ValueTree::readFromStream(stream);
 
-        if (newState.isValid())
-        {
-            mParameters.state = newState;
-            mSkeletonProcessor.initState();
-
-            if(getActiveEditor() != nullptr)
-			{
-                RootViewComponent* rootView = dynamic_cast<RootViewComponent*>(getActiveEditor());
-				rootView->updatePath();
-			}  
-        }
     }
 
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override
     {
-        return true;
         const auto& mainInLayout  = layouts.getChannelSet (true,  0);
         const auto& mainOutLayout = layouts.getChannelSet (false, 0);
 
@@ -118,7 +104,7 @@ public:
 
 private:
     juce::AudioProcessorValueTreeState mParameters; 
-    SkeletonAudioProcessor mSkeletonProcessor; 
+    SkeletonAudioProcessor mSkeletonProcessor;
     ParameterSetup mParameterSetup;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessor)
