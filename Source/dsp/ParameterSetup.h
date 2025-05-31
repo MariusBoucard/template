@@ -5,10 +5,7 @@
 #include <mutex>
 #include <deque>
 #include <functional>
-#include "Mappers.h" // Ensure this path is correct
-
-// Forward declaration if Mappers is complex, or include if simple
-// class Mappers;
+#include "Mappers.h"
 
 struct FilterCoefficients
 {
@@ -20,7 +17,7 @@ struct ParameterSetupData
 {
     FilterCoefficients lowPassFilterCoeffs;
     FilterCoefficients highPassFilterCoeffs;
-    double gain = 0.0; // Initialize members
+    double gain = 0.0;
     uint64_t version = 0;
 };
 
@@ -31,6 +28,8 @@ public:
 
     ParameterSetup(juce::AudioProcessorValueTreeState& inApvts);
     ~ParameterSetup() override;
+
+    ParameterSetupData createSetupData();
 
     void parameterChanged(const juce::String& parameterID, float newValue) override;
 
@@ -55,7 +54,7 @@ private:
 
     std::deque<MapperTask> mTaskQueue;
     std::mutex mTasksQueueMutex;
-    juce::WaitableEvent mTasksEvent; // To signal the MappersProcessingThread about new tasks
+    juce::WaitableEvent mTasksEvent;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ParameterSetup)
 };
