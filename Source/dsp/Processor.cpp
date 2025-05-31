@@ -14,8 +14,6 @@ SkeletonAudioProcessor::SkeletonAudioProcessor(juce::AudioProcessorValueTreeStat
     , mParameterSetup(inParameterSetup)
     , mBlockSize(256)
     , mSampleRate(44100)
-    , mParamListener(*this, mParameterSetup)
-
 {
     setRateAndBufferSizeDetails(mSampleRate, mBlockSize);
     initialiseGraph();
@@ -49,6 +47,7 @@ void SkeletonAudioProcessor::updateMeter(bool isOutput, AudioBuffer<float>& buff
 void SkeletonAudioProcessor::processBlock(AudioBuffer<float>& inBuffer, MidiBuffer& inMidiBuffer)
 {
     juce::ScopedNoDenormals noDenormals;
-    mProcessorGraph.processBlock(inBuffer, inMidiBuffer);
+    inBuffer.applyGain(mParameterSetup.getAudioThreadParams()->gain);
+   // mProcessorGraph.processBlock(inBuffer, inMidiBuffer);
     updateMeter(true, inBuffer, inBuffer.getNumSamples(), getTotalNumOutputChannels());
 }

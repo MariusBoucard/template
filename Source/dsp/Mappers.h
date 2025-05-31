@@ -18,7 +18,6 @@ public:
 	}
 	static void setGain(double& inGainSetup, double gain)
 	{
-		std::this_thread::sleep_for(std::chrono::seconds(3));
 		inGainSetup = gain;
 	}
 	static void setSampleRate(double sampleRate)

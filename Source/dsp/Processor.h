@@ -2,7 +2,6 @@
 #include <JuceHeader.h>
 #include "ParameterSetup.h"
 #include "Bones/GainBone.h"
-#include "Mappers.h"
 #include <random>
 #include "Processor.hpp"
 
@@ -116,7 +115,6 @@ private:
     //==============================================================================
     juce::AudioProcessorValueTreeState &mParameters;
     ParameterSetup &mParameterSetup;
-    ParamListener mParamListener;
 
 private:
     std::atomic<float> mRmsLevelLeft{0.0f};
