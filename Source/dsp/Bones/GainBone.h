@@ -9,12 +9,13 @@ class GainProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    GainProcessor()
+    GainProcessor(juce::AudioProcessorValueTreeState& inParameters)
         : AudioProcessor (BusesProperties().withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                                           .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
-          gainParameter (new juce::AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f))
+                                           .withOutput ("Output", juce::AudioChannelSet::stereo(), true))
+        , mParameters(inParameters)
+        , gainParameter(*inParameters.getParameter("gain"))
     {
-        addParameter (gainParameter);
+        addParameter (&gainParameter);
     }
 
     ~GainProcessor() override
@@ -63,7 +64,7 @@ public:
         for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
             buffer.clear (i, 0, buffer.getNumSamples());
 
-        const float currentGain = gainParameter->get();
+        const float currentGain = gainParameter.getValue();
 
         for (int channel = 0; channel < totalNumInputChannels; ++channel)
         {
@@ -107,11 +108,10 @@ public:
         juce::ignoreUnused (data, sizeInBytes);
     }
 
-    //==============================================================================
-    // Member variable to hold our gain parameter
-    juce::AudioParameterFloat* gainParameter;
+    juce::RangedAudioParameter& gainParameter;
 
 private:
+    juce::AudioProcessorValueTreeState& mParameters;
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GainProcessor)
 };

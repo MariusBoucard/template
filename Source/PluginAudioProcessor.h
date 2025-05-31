@@ -43,11 +43,20 @@ public:
     juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::createParameterLayout()
     {
         std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
-        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain", "Gain", 0.0f, 1.0f, 0.5f));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain3", "Gain3", 0.0f, 1.0f, 0.5f));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain4", "Gain4", 0.0f, 1.0f, 0.5f));
-        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain5", "Gain5", 0.0f, 1.0f, 0.5f));
+        auto attributes = juce::AudioParameterFloatAttributes()
+                                .withStringFromValueFunction ([](float value, int )
+                                                              {
+                                                                  return juce::String (value * 100.0f);
+                                                              })
+                                .withLabel (" db magueul");
 
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("gain",
+                                                                    "Gain",
+                                                                     juce::NormalisableRange<float>(0.0f,
+                                                                     1.0f,
+                                                                     0.01),
+                                                                     0.5f,
+                                                                     attributes));
         return { params.begin(), params.end() };
     }
 
@@ -58,9 +67,9 @@ public:
 
     AudioProcessorEditor* createEditor() override {
         //auto editor = new RootViewComponent(mSkeletonProcessor);
+        auto editor = new GenericAudioProcessorEditor(this);
 
         //editor->updatePath();
-        auto editor = new GenericAudioProcessorEditor(this);
         return editor;
     }
     bool hasEditor() const override                        { return true;   }

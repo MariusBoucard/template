@@ -1,4 +1,5 @@
 #include <JuceHeader.h>
+#include <thread>
 
 
 class Mappers
@@ -15,10 +16,15 @@ public:
 		static Mappers instance;
 		return instance;
 	}
-
+	static void setGain(double& inGainSetup, double gain)
+	{
+		std::this_thread::sleep_for(std::chrono::seconds(3));
+		inGainSetup = gain;
+	}
 	static void setSampleRate(double sampleRate)
 	{
 		getMapperInstance().mSampleRate = sampleRate;
+		// TODO Set reload all
 	}
 
 

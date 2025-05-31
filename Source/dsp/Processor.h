@@ -91,7 +91,7 @@ public:
     void initialiseGraph() {
         mInputNode = mProcessorGraph.addNode(std::make_unique<AudioInputNode>(AudioInputNode::audioInputNode));
         mOutputNode = mProcessorGraph.addNode(std::make_unique<AudioOutputNode>(AudioOutputNode::audioOutputNode));
-        mGainNode = mProcessorGraph.addNode(std::make_unique<GainProcessor>());
+        mGainNode = mProcessorGraph.addNode(std::make_unique<GainProcessor>(mParameters));
 
         for (int channel = 0; channel < 2; ++channel)
         {
