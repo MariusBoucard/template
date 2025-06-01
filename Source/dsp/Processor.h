@@ -18,6 +18,7 @@ public:
     void prepareToPlay(double, int) override {
         mSampleRate = getSampleRate();
         mBlockSize = getBlockSize();
+
         Mappers::getMapperInstance().setSampleRate(mSampleRate);
         mProcessorGraph.prepareToPlay(mSampleRate, mBlockSize);
     }

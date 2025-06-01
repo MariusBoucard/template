@@ -60,7 +60,10 @@ public:
         return { params.begin(), params.end() };
     }
 
-    void prepareToPlay (double, int) override {}
+    void prepareToPlay (double sampleRate, int blockSize) override {
+        std::cout << "prepareToPlay" << std::endl;
+        mSkeletonProcessor.prepareToPlay(sampleRate, blockSize);
+    }
     void releaseResources() override {}
 
     void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override;

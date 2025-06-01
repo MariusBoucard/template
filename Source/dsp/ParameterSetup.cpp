@@ -1,5 +1,4 @@
 #include "ParameterSetup.h"
-// #include <iostream> // For debugging
 
 ParameterSetup::ParameterSetup(juce::AudioProcessorValueTreeState &inApvts)
     : juce::Thread("MappersProcessingThread")
@@ -21,6 +20,7 @@ ParameterSetup::~ParameterSetup() {
     mParameters.removeParameterListener("gain", this);
     mParameters.removeParameterListener("lowPassCutoff", this);
     mParameters.removeParameterListener("highPassResonance", this);
+    stopThread(10);
 }
 
 ParameterSetupData ParameterSetup::createSetupData() {
