@@ -7,6 +7,7 @@ project("template")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../../../FRUT/prefix/FRUT/cmake")
 include(Reprojucer)
+set(CMAKE_CXX_STANDARD 17)
 
 
 set(Template_jucer_FILE
@@ -14,7 +15,7 @@ set(Template_jucer_FILE
 )
 
 
-set(JUCE_MODULES_GLOBAL_PATH "C:/Users/Marius/Desktop/JUCE/modules")
+set(JUCE_MODULES_GLOBAL_PATH "C:/Users/Marius/Documents/JUCE/modules")
 
 
 jucer_project_begin(
@@ -43,7 +44,6 @@ jucer_project_settings(
 jucer_audio_plugin_settings(
   PLUGIN_FORMATS
     "VST3"
-    "AU"
     "Standalone"
   # PLUGIN_CHARACTERISTICS
   PLUGIN_NAME "Template"
@@ -68,67 +68,69 @@ jucer_audio_plugin_settings(
 jucer_project_files("template/Source"
 # Compile   Xcode     Binary    File
 #           Resource  Resource
-  x         .         .         "Source/Main.cpp"
-  x         .         .         "Source/PluginAudioProcessor.cpp"
-  x         .         .         "Source/PluginAudioProcessor.h"
-  x         .         .         "Source/PluginAudioProcessor.hpp"
+ x         .         .         "Source/FaustPlugin.h"
+x         .         .         "Source/FaustSync.cpp"
+#  x         .         .         "Source/Main.cpp"
+#  x         .         .         "Source/PluginAudioProcessor.cpp"
+#  x         .         .         "Source/PluginAudioProcessor.h"
+#  x         .         .         "Source/PluginAudioProcessor.hpp"
 )
-
-jucer_project_files("template/Source/dsp"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-  x         .         .         "Source/dsp/Mappers.cpp"
-  x         .         .         "Source/dsp/Mappers.h"
-  x         .         .         "Source/dsp/ParameterSetup.h"
-  x         .         .         "Source/dsp/ParameterSetup.cpp"
-  x         .         .         "Source/dsp/Processor.cpp"
-  x         .         .         "Source/dsp/Processor.h"
-  x         .         .         "Source/dsp/Processor.hpp"
-)
-
-jucer_project_files("template/Source/dsp/Bones"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-        x         .         .         "Source/dsp/Bones/GainBone.h"
-
-)
-
-jucer_project_files("template/Source/looknfeel"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-  x         .         .         "Source/looknfeel/GeneralLookAndFeel.h"
-  x         .         .         "Source/looknfeel/StripKnob_look_n_feel.h"
-  x         .         .         "Source/looknfeel/ToogleButtonLookAndFeel.h"
-  x         .         .         "Source/looknfeel/TopBarLookAndFeel.h"
-)
-
-jucer_project_files("template/Source/ui"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-  x         .         .         "Source/ui/gui.cpp"
-  x         .         .         "Source/ui/gui.h"
-  x         .         .         "Source/ui/gui.hpp"
-)
-
-jucer_project_files("template/Source/ui/components"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-  x         .         .         "Source/ui/components/TopBarComponent.cpp"
-  x         .         .         "Source/ui/components/TopBarComponent.h"
-)
-
-
-jucer_project_files("template/ressources/knob"
-# Compile   Xcode     Binary    File
-#           Resource  Resource
-
-  .         x         x         "Source/ressources/knob/g1.png"
-)
-
-
-jucer_project_files("template/ressources/plate"
-  .         x         x         "Source/ressources/plate/plate.png"
-)
+#
+#jucer_project_files("template/Source/dsp"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#  x         .         .         "Source/dsp/Mappers.cpp"
+#  x         .         .         "Source/dsp/Mappers.h"
+#  x         .         .         "Source/dsp/ParameterSetup.h"
+#  x         .         .         "Source/dsp/ParameterSetup.cpp"
+#  x         .         .         "Source/dsp/Processor.cpp"
+#  x         .         .         "Source/dsp/Processor.h"
+#  x         .         .         "Source/dsp/Processor.hpp"
+#)
+#
+#jucer_project_files("template/Source/dsp/Bones"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#        x         .         .         "Source/dsp/Bones/GainBone.h"
+#
+#)
+#
+#jucer_project_files("template/Source/looknfeel"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#  x         .         .         "Source/looknfeel/GeneralLookAndFeel.h"
+#  x         .         .         "Source/looknfeel/StripKnob_look_n_feel.h"
+#  x         .         .         "Source/looknfeel/ToogleButtonLookAndFeel.h"
+#  x         .         .         "Source/looknfeel/TopBarLookAndFeel.h"
+#)
+#
+#jucer_project_files("template/Source/ui"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#  x         .         .         "Source/ui/gui.cpp"
+#  x         .         .         "Source/ui/gui.h"
+#  x         .         .         "Source/ui/gui.hpp"
+#)
+#
+#jucer_project_files("template/Source/ui/components"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#  x         .         .         "Source/ui/components/TopBarComponent.cpp"
+#  x         .         .         "Source/ui/components/TopBarComponent.h"
+#)
+#
+#
+#jucer_project_files("template/ressources/knob"
+## Compile   Xcode     Binary    File
+##           Resource  Resource
+#
+##  .         x         x         "Source/ressources/knob/g1.png"
+#)
+#
+#
+##jucer_project_files("template/ressources/plate"
+##  .         x         x         "Source/ressources/plate/plate.png"
+##)
 
 jucer_project_module(
   juce_audio_basics

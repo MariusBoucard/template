@@ -72,7 +72,6 @@ public:
         //auto editor = new RootViewComponent(mSkeletonProcessor);
         auto editor = new GenericAudioProcessorEditor(this);
 
-        //editor->updatePath();
         return editor;
     }
     bool hasEditor() const override                        { return true;   }

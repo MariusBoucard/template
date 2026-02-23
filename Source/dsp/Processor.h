@@ -71,7 +71,7 @@ public:
         return (mainInLayout == mainOutLayout && (!mainInLayout.isDisabled()));
     }
 
-    juce::AudioProcessorValueTreeState &SkeletonAudioProcessor::getCustomParameterTree() {
+     AudioProcessorValueTreeState&  SkeletonAudioProcessor::getCustomParameterTree() {
         return mParameters;
     }
 

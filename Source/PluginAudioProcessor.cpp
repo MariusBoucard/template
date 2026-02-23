@@ -10,6 +10,7 @@ PluginAudioProcessor::PluginAudioProcessor()
       , mParameters(*this, nullptr, "PARAMETERS", createParameterLayout())
       , mParameterSetup(mParameters)
       , mSkeletonProcessor(mParameters, mParameterSetup) {
+
 }
 
 PluginAudioProcessor::~PluginAudioProcessor() {
