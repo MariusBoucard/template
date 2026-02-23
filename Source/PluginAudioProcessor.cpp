@@ -1,7 +1,5 @@
 #include "PluginAudioProcessor.h"
 #include "dsp/ParameterSetup.h"
-#include <filesystem>
-#include <iostream>
 
 
 PluginAudioProcessor::PluginAudioProcessor()
@@ -9,7 +7,8 @@ PluginAudioProcessor::PluginAudioProcessor()
           .withOutput("Output", AudioChannelSet::stereo()))
       , mParameters(*this, nullptr, "PARAMETERS", createParameterLayout())
       , mParameterSetup(mParameters)
-      , mSkeletonProcessor(mParameters, mParameterSetup) {
+      , mSkeletonProcessor(mParameters, mParameterSetup)
+{
 
 }
 

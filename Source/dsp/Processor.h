@@ -2,8 +2,8 @@
 #include <JuceHeader.h>
 #include "ParameterSetup.h"
 #include "Bones/GainBone.h"
-#include <random>
 #include "Processor.hpp"
+# include "Bones/FaustMultiheadFeedback.h";
 
 //==============================================================================
 class SkeletonAudioProcessor final : public AudioProcessor {
@@ -15,16 +15,40 @@ public:
     ~SkeletonAudioProcessor() override;
 
 
-    void prepareToPlay(double, int) override {
-        mSampleRate = getSampleRate();
-        mBlockSize = getBlockSize();
+    void prepareToPlay(double inSampleRate, int inBlockSize) override {
+        mSampleRate = inSampleRate;
+        mBlockSize = inBlockSize;
 
         Mappers::getMapperInstance().setSampleRate(mSampleRate);
         mProcessorGraph.prepareToPlay(mSampleRate, mBlockSize);
+
+        mFaustProcessor = new mydsp();
+        mFaustProcessor->init(mSampleRate);
+        fUI = new MapUI();
+        mFaustProcessor->buildUserInterface(fUI);
+       //
+        inputs = new float*[2];
+        for (int channel = 0; channel < 2; ++channel) {
+            inputs[channel] = new float[mBlockSize];
+        }
+        outputs = new float*[2];
+        for (int channel = 0; channel < 2; ++channel) {
+            outputs[channel] = new float[mBlockSize];
+        }
     }
 
     void releaseResources() override {
         mProcessorGraph.releaseResources();
+        delete mFaustProcessor; // TODO THIS CAUSES CRASH ON EXIT
+        delete fUI;
+        for (int channel = 0; channel < 2; ++channel) {
+            delete[] outputs[channel];
+        }
+        delete [] outputs;
+        for (int channel = 0; channel < 2; ++channel) {
+            delete[] inputs[channel];
+        }
+        delete[] inputs;
     }
 
     void processBlock(AudioBuffer<float> &buffer, MidiBuffer &) override;
@@ -39,7 +63,7 @@ public:
     bool hasEditor() const override { return false; }
 
     //==============================================================================
-    const String getName() const override { return "Radiator"; }
+    const String getName() const override { return "template"; }
     bool acceptsMidi() const override { return false; }
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override { return 0; }
@@ -128,8 +152,10 @@ private:
     using AudioInputNode = juce::AudioProcessorGraph::AudioGraphIOProcessor;
     using AudioOutputNode = juce::AudioProcessorGraph::AudioGraphIOProcessor;
 
-    // using NamNode         = VotreClasseNAMProcessor; // Hérite de juce::AudioProcessor
-
+    mydsp* mFaustProcessor;
+    MapUI* fUI;
+    float** inputs;
+    float** outputs;
     juce::AudioProcessorGraph::Node::Ptr mInputNode;
     juce::AudioProcessorGraph::Node::Ptr mOutputNode;
     juce::AudioProcessorGraph::Node::Ptr mGainNode;

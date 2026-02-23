@@ -7,11 +7,11 @@
 */
 
 #include <JuceHeader.h>
-#include "FaustPlugin.h"
 #include "PluginAudioProcessor.h"
 
 //==============================================================================
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new FaustPlugInAudioProcessor();
+    //return new FaustPlugInAudioProcessor();
+    return new PluginAudioProcessor();
 }

@@ -61,7 +61,6 @@ public:
     }
 
     void prepareToPlay (double sampleRate, int blockSize) override {
-        std::cout << "prepareToPlay" << std::endl;
         mSkeletonProcessor.prepareToPlay(sampleRate, blockSize);
     }
     void releaseResources() override {}
@@ -114,7 +113,7 @@ public:
     }
 
 private:
-    juce::AudioProcessorValueTreeState mParameters; 
+    juce::AudioProcessorValueTreeState mParameters;
     SkeletonAudioProcessor mSkeletonProcessor;
     ParameterSetup mParameterSetup;
 

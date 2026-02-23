@@ -69,68 +69,70 @@ jucer_project_files("template/Source"
 # Compile   Xcode     Binary    File
 #           Resource  Resource
  x         .         .         "Source/FaustPlugin.h"
-x         .         .         "Source/FaustSync.cpp"
-#  x         .         .         "Source/Main.cpp"
-#  x         .         .         "Source/PluginAudioProcessor.cpp"
-#  x         .         .         "Source/PluginAudioProcessor.h"
-#  x         .         .         "Source/PluginAudioProcessor.hpp"
+#x         .         .          "Source/FaustSync.cpp"
+x         .         .         "Source/Main.cpp"
+x         .         .         "Source/PluginAudioProcessor.cpp"
+x         .         .         "Source/PluginAudioProcessor.h"
+x         .         .         "Source/PluginAudioProcessor.hpp"
 )
 #
-#jucer_project_files("template/Source/dsp"
+jucer_project_files("template/Source/dsp"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
-#  x         .         .         "Source/dsp/Mappers.cpp"
-#  x         .         .         "Source/dsp/Mappers.h"
-#  x         .         .         "Source/dsp/ParameterSetup.h"
-#  x         .         .         "Source/dsp/ParameterSetup.cpp"
-#  x         .         .         "Source/dsp/Processor.cpp"
-#  x         .         .         "Source/dsp/Processor.h"
-#  x         .         .         "Source/dsp/Processor.hpp"
-#)
+  x         .         .         "Source/dsp/Mappers.cpp"
+  x         .         .         "Source/dsp/Mappers.h"
+  x         .         .         "Source/dsp/ParameterSetup.h"
+  x         .         .         "Source/dsp/ParameterSetup.cpp"
+  x         .         .         "Source/dsp/Processor.cpp"
+  x         .         .         "Source/dsp/Processor.h"
+  x         .         .         "Source/dsp/Processor.hpp"
+)
 #
-#jucer_project_files("template/Source/dsp/Bones"
+jucer_project_files("template/Source/dsp/Bones"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
 #        x         .         .         "Source/dsp/Bones/GainBone.h"
+        x         .         .         "Source/dsp/Bones/FaustMultiheadFeedback.h"
+#        x         .         .         "Source/dsp/Bones/FaustDelayBone.cpp"
+        #
+)
 #
-#)
-#
-#jucer_project_files("template/Source/looknfeel"
+jucer_project_files("template/Source/looknfeel"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
 #  x         .         .         "Source/looknfeel/GeneralLookAndFeel.h"
-#  x         .         .         "Source/looknfeel/StripKnob_look_n_feel.h"
-#  x         .         .         "Source/looknfeel/ToogleButtonLookAndFeel.h"
+x         .         .         "Source/looknfeel/StripKnob_look_n_feel.h"
+x         .         .         "Source/looknfeel/ToogleButtonLookAndFeel.h"
 #  x         .         .         "Source/looknfeel/TopBarLookAndFeel.h"
-#)
+)
 #
-#jucer_project_files("template/Source/ui"
+jucer_project_files("template/Source/ui"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
-#  x         .         .         "Source/ui/gui.cpp"
-#  x         .         .         "Source/ui/gui.h"
-#  x         .         .         "Source/ui/gui.hpp"
-#)
+x         .         .         "Source/ui/gui.cpp"
+x         .         .         "Source/ui/gui.h"
+x         .         .         "Source/ui/gui.hpp"
+)
 #
-#jucer_project_files("template/Source/ui/components"
+jucer_project_files("template/Source/ui/components"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
-#  x         .         .         "Source/ui/components/TopBarComponent.cpp"
-#  x         .         .         "Source/ui/components/TopBarComponent.h"
-#)
+  x         .         .         "Source/ui/components/TopBarComponent.cpp"
+  x         .         .         "Source/ui/components/TopBarComponent.h"
+)
 #
 #
-#jucer_project_files("template/ressources/knob"
+jucer_project_files("template/ressources/knob"
 ## Compile   Xcode     Binary    File
 ##           Resource  Resource
 #
-##  .         x         x         "Source/ressources/knob/g1.png"
-#)
+  .         x         x         "Source/ressources/knob/g1.png"
+)
 #
 #
-##jucer_project_files("template/ressources/plate"
-##  .         x         x         "Source/ressources/plate/plate.png"
-##)
+jucer_project_files("template/ressources/plate"
+  .         x         x         "Source/ressources/plate/plate.png"
+)
 
 jucer_project_module(
   juce_audio_basics

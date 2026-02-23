@@ -1,5 +1,4 @@
 #pragma once
-#include "../looknfeel/StripKnob_look_n_feel.h"
 #include "../looknfeel/ToogleButtonLookAndFeel.h"
 #include "../looknfeel/TopBarLookAndFeel.h"
 #include "components/TopBarComponent.h"
@@ -50,9 +49,9 @@ private:
     juce::Image mImage;
     juce::AudioProcessor& mProcessor;
 
-    KnobLookAndFeel mKnobLookAndFeel; 
+   // KnobLookAndFeel mKnobLookAndFeel;
     DropDownLookAndFeel mDropDownLookAndFeel; 
-    ToggleButtonLookAndFeel mToggleLookAndFeel;
+  //  ToggleButtonLookAndFeel mToggleLookAndFeel;
 
 #include "gui.hpp"
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(RootViewComponent)

@@ -9,10 +9,10 @@ RootViewComponent::RootViewComponent(juce::AudioProcessor& processor)
     : AudioProcessorEditor(processor)
     , mProcessor(processor)
 {
-    auto imageData = BinaryData::plate_png;
-    auto imageDataSize = BinaryData::plate_pngSize;
+ //   auto imageData = BinaryData::plate_png;
+   // auto imageDataSize = BinaryData::plate_pngSize;
 
-    mImage = juce::ImageFileFormat::loadFrom(imageData, imageDataSize);
+    //mImage = juce::ImageFileFormat::loadFrom(imageData, imageDataSize);
 
     if (mImage.isNull())
         DBG("Failed to load image from resources");
