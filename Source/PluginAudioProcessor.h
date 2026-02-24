@@ -33,7 +33,8 @@
 #include "dsp/Processor.h"
 #include "dsp/ParameterSetup.h"
 
-class PluginAudioProcessor final : public AudioProcessor
+class PluginAudioProcessor final : public AudioProcessor,
+                                    public juce::AudioProcessorValueTreeState::Listener
 {
 public:
 
@@ -43,6 +44,32 @@ public:
     juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::createParameterLayout()
     {
         std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+        mydsp* tempDsp = new mydsp();
+        MapUI* tempUI = new MapUI();
+
+        tempDsp->buildUserInterface(tempUI);
+        auto fullPathMap = tempUI->getFullpathMap();
+
+        int i = 0;
+        for (const auto& [key, value] : fullPathMap)
+        {
+            auto name = key;
+            auto label =name;
+            auto init = tempUI->getParamValue(key);
+            auto min = 0;
+            auto max = 1;
+
+            params.push_back(std::make_unique<juce::AudioParameterFloat>(
+                name,
+                name,
+                juce::NormalisableRange<float>(min, max),
+                init
+            ));
+            i++;
+        }
+        delete tempDsp;
+        delete tempUI;
         auto attributes = juce::AudioParameterFloatAttributes()
                                 .withStringFromValueFunction ([](float value, int )
                                                               {
@@ -57,13 +84,24 @@ public:
                                                                      0.01),
                                                                      0.5f,
                                                                      attributes));
+
+
         return { params.begin(), params.end() };
+    }
+    void parameterChanged (const juce::String& parameterID, float newValue) override
+    {
+        if (mFaustUI != nullptr)
+            mFaustUI->setParamValue(parameterID.toStdString(), newValue);
     }
 
     void prepareToPlay (double sampleRate, int blockSize) override {
+        mFaustUI = new MapUI();
+        mSkeletonProcessor.setMapUI(mFaustUI);
         mSkeletonProcessor.prepareToPlay(sampleRate, blockSize);
     }
-    void releaseResources() override {}
+    void releaseResources() override {
+        delete mFaustUI;
+    }
 
     void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override;
 
@@ -112,7 +150,9 @@ public:
         return mParameters;
     }
 
+
 private:
+    MapUI* mFaustUI;
     juce::AudioProcessorValueTreeState mParameters;
     SkeletonAudioProcessor mSkeletonProcessor;
     ParameterSetup mParameterSetup;

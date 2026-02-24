@@ -9,10 +9,17 @@ PluginAudioProcessor::PluginAudioProcessor()
       , mParameterSetup(mParameters)
       , mSkeletonProcessor(mParameters, mParameterSetup)
 {
-
+    for (auto* param : mParameters.processor.getParameters())
+    {
+        mParameters.addParameterListener(param->getName(152), this);
+    }
 }
 
 PluginAudioProcessor::~PluginAudioProcessor() {
+    for (auto* param : getParameters())
+    {
+        mParameters.removeParameterListener(param->getName(152), this);
+    }
 }
 
 void PluginAudioProcessor::processBlock(AudioBuffer<float> &buffer, MidiBuffer &a) {

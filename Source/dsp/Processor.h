@@ -24,7 +24,7 @@ public:
 
         mFaustProcessor = new mydsp();
         mFaustProcessor->init(mSampleRate);
-        fUI = new MapUI();
+      //  fUI = new MapUI();
         mFaustProcessor->buildUserInterface(fUI);
        //
         inputs = new float*[2];
@@ -39,7 +39,7 @@ public:
 
     void releaseResources() override {
         mProcessorGraph.releaseResources();
-        delete mFaustProcessor; // TODO THIS CAUSES CRASH ON EXIT
+       // delete mFaustProcessor; // TODO THIS CAUSES CRASH ON EXIT
         delete fUI;
         delete mFaustProcessor;
         for (int channel = 0; channel < 2; ++channel) {
@@ -132,6 +132,9 @@ public:
         }
     }
 
+    void setMapUI(MapUI *inUI) {
+        fUI = inUI;
+    }
     void setRateAndBufferSizeDetails(double sampleRate, int bufferSize) {
         mSampleRate = sampleRate;
         mBlockSize = bufferSize;
