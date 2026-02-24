@@ -306,8 +306,15 @@ jucer_export_target_configuration(
 
 jucer_project_end()
 
+set(VST3_DESTINATION_PATH "D:/vstcreation/Template.vst3/Contents/x86_64-win")
+
 add_custom_command(TARGET template_VST3 POST_BUILD
+        # 1. Create the necessary internal folder structure
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VST3_DESTINATION_PATH}"
+
+        # 2. Copy the binary into that specific subfolder
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "$<TARGET_FILE:template_VST3>"
-        "D:\\vstcreation\\$<TARGET_FILE_NAME:template_VST3>"
+        "${VST3_DESTINATION_PATH}/$<TARGET_FILE_NAME:template_VST3>"
+        COMMENT "Creating VST3 Bundle structure in D:/vstcreation"
 )

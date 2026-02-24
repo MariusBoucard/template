@@ -41,6 +41,7 @@ public:
         mProcessorGraph.releaseResources();
         delete mFaustProcessor; // TODO THIS CAUSES CRASH ON EXIT
         delete fUI;
+        delete mFaustProcessor;
         for (int channel = 0; channel < 2; ++channel) {
             delete[] outputs[channel];
         }
