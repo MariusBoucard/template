@@ -26,7 +26,7 @@ with {
 djembe = pm.djembe(110, 0.3, 0.5, 0.8, gate);
 
 // ===== Main Process =====
-process = djembe <: (dry, wet) :> _,_
+process = _ <: (dry, wet) :> _,_
 with {
     dry = * (1 - globalMix) <: _,_;
     

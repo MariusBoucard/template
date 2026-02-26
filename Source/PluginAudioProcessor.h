@@ -95,12 +95,12 @@ public:
     }
 
     void prepareToPlay (double sampleRate, int blockSize) override {
-        mFaustUI = new MapUI();
+        mFaustUI = new MapUI(); // Pas bon ca
         mSkeletonProcessor.setMapUI(mFaustUI);
         mSkeletonProcessor.prepareToPlay(sampleRate, blockSize);
     }
     void releaseResources() override {
-        delete mFaustUI;
+      //  delete mFaustUI;
     }
 
     void processBlock(AudioBuffer<float>& buffer, MidiBuffer&) override;
