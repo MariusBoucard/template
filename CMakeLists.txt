@@ -14,9 +14,6 @@ set(Template_jucer_FILE
   "${CMAKE_CURRENT_LIST_DIR}/template.jucer"
 )
 
-
-
-
 jucer_project_begin(
   JUCER_FORMAT_VERSION "1"
   PROJECT_FILE "${Template_jucer_FILE}"
@@ -303,7 +300,6 @@ jucer_export_target_configuration(
   OPTIMISATION "Maximise speed"
 )
 
-
 jucer_export_target("Code::Blocks (Linux)")
 jucer_export_target_configuration(
         "Code::Blocks (Linux)"
@@ -311,7 +307,6 @@ jucer_export_target_configuration(
         DEBUG_MODE OFF
         BINARY_NAME "template"
 )
-
 
 jucer_project_end()
 
