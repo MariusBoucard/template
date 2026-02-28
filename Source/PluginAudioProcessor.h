@@ -41,7 +41,7 @@ public:
     PluginAudioProcessor();
     ~PluginAudioProcessor() override;
 
-    juce::AudioProcessorValueTreeState::ParameterLayout PluginAudioProcessor::createParameterLayout()
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
     {
         std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
@@ -145,7 +145,7 @@ public:
         return (mainInLayout == mainOutLayout && (! mainInLayout.isDisabled()));
     }
 
-    juce::AudioProcessorValueTreeState& PluginAudioProcessor::getCustomParameterTree()
+    juce::AudioProcessorValueTreeState& getCustomParameterTree()
     {
         return mParameters;
     }

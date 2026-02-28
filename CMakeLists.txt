@@ -15,7 +15,6 @@ set(Template_jucer_FILE
 )
 
 
-set(JUCE_MODULES_GLOBAL_PATH "C:/Users/Marius/Documents/JUCE/modules")
 
 
 jucer_project_begin(
@@ -303,6 +302,16 @@ jucer_export_target_configuration(
   BINARY_NAME "Template"
   OPTIMISATION "Maximise speed"
 )
+
+
+jucer_export_target("Code::Blocks (Linux)")
+jucer_export_target_configuration(
+        "Code::Blocks (Linux)"
+        NAME "Debug"
+        DEBUG_MODE OFF
+        BINARY_NAME "template"
+)
+
 
 jucer_project_end()
 

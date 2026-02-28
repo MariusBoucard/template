@@ -1,4 +1,4 @@
-void RootViewComponent::defineKnobLayout()
+void defineKnobLayout()
 {
 
   //  computeKnobLayout();
@@ -6,7 +6,7 @@ void RootViewComponent::defineKnobLayout()
 }
 
 
-void RootViewComponent::configureNodes(juce::AudioProcessor& inProcessor)
+void configureNodes(juce::AudioProcessor& inProcessor)
 {
     auto bounds = getLocalBounds();
 

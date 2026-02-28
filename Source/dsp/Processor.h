@@ -96,7 +96,7 @@ public:
         return (mainInLayout == mainOutLayout && (!mainInLayout.isDisabled()));
     }
 
-     AudioProcessorValueTreeState&  SkeletonAudioProcessor::getCustomParameterTree() {
+     AudioProcessorValueTreeState&  getCustomParameterTree() {
         return mParameters;
     }
 
@@ -163,7 +163,7 @@ private:
     juce::AudioProcessorGraph::Node::Ptr mInputNode;
     juce::AudioProcessorGraph::Node::Ptr mOutputNode;
     juce::AudioProcessorGraph::Node::Ptr mGainNode;
-    double mBlockSize;
+    int mBlockSize;
     double mSampleRate;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SkeletonAudioProcessor)
