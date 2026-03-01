@@ -1,7 +1,6 @@
 #include "gui.h"
 
 #include "../dsp/Processor.h"
-#include <JuceHeader.h>
 int RootViewComponent::ROOT_WIDTH = 900;
 int RootViewComponent::ROOT_HEIGHT = 550;
 
@@ -28,7 +27,7 @@ RootViewComponent::~RootViewComponent()
 
 }
 
-void RootViewComponent::setSliderAttachement(AudioProcessor& inProcessoe)
+void RootViewComponent::setSliderAttachement(juce::AudioProcessor& inProcessoe)
 {
     SkeletonAudioProcessor* ampAudioProcessor = dynamic_cast<SkeletonAudioProcessor*>(&inProcessoe);
 
